@@ -18,11 +18,11 @@ class Menu(models.Model):
     name = models.CharField(verbose_name='Menu name', max_length=20, blank=False)
     restaurant = models.ForeignKey(Restaurant, related_name='menus', on_delete=models.CASCADE,
         verbose_name='Restaurant', blank=False)
-    day = models.DateField(verbose_name='Day', auto_now_add=True, db_index=True)
+    day = models.DateField(verbose_name='Day', db_index=True)
     dishes = models.ManyToManyField('Dish', blank=False, verbose_name='Dished', related_name='menus')
 
     def __str__(self):
-        return f'Menu {self.name} of {self.restaurant.name} restaurant'
+        return f'Menu {self.name} of {self.restaurant.name} restaurant on {self.day}'
 
 # Non-unique dishes for testing purposes
 class Dish(models.Model):
