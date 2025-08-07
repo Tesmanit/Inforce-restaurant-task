@@ -4,6 +4,7 @@ from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
 from django.contrib.auth.models import User
+from django.db import transaction
 
 from restaurant.models import Menu, Dish, Restaurant
 from restaurant.serializers import MenuSerializer, RestaurantCreateSerializer
@@ -12,14 +13,24 @@ from restaurant.serializers import MenuSerializer, RestaurantCreateSerializer
 class RestaurantViewSet(viewsets.ModelViewSet):
     http_method_names = ['post']
     permission_classes = [permissions.IsAdminUser]
+
+    @transaction.atomic
     def create(self, request, *args, **kwargs):
         restaurant_name = request.data.get('restaurant_name')
         restaurant_user_password = request.data.get('restaurant_user_password')
+
+        if not restaurant_name or not restaurant_user_password:
+            return Response('restaurant_name, restaurant_user_password are required fields',
+                status=status.HTTP_400_BAD_REQUEST)
+        
+        if User.objects.filter(username=restaurant_name).exists():
+            return Response('User with this nickname already exists', status=status.HTTP_400_BAD_REQUEST)
+        
         user = User.objects.create_user(username=restaurant_name, password=restaurant_user_password)
         user.save()
         restaurant = Restaurant.objects.create(name=restaurant_name, user=user)
         serializer = RestaurantCreateSerializer(restaurant)
-        return Response(data=serializer.data)
+        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
 
 
 class MenuViewSet(viewsets.ModelViewSet):
