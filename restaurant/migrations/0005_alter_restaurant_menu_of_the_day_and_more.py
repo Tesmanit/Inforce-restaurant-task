@@ -8,19 +8,33 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('restaurant', '0004_alter_restaurant_menu_of_the_day'),
+        ("restaurant", "0004_alter_restaurant_menu_of_the_day"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='restaurant',
-            name='menu_of_the_day',
-            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='featured_in_restaurant', to='restaurant.menu', verbose_name='Menu of the day'),
+            model_name="restaurant",
+            name="menu_of_the_day",
+            field=models.OneToOneField(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                related_name="featured_in_restaurant",
+                to="restaurant.menu",
+                verbose_name="Menu of the day",
+            ),
         ),
         migrations.AlterField(
-            model_name='restaurant',
-            name='user',
-            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='restaurant_model', to=settings.AUTH_USER_MODEL, verbose_name='Representing user'),
+            model_name="restaurant",
+            name="user",
+            field=models.OneToOneField(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name="restaurant_model",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Representing user",
+            ),
         ),
     ]

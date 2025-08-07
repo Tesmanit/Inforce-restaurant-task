@@ -8,25 +8,42 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('employees', '0002_employee_restaurant_employee_user'),
-        ('restaurant', '0001_initial'),
+        ("employees", "0002_employee_restaurant_employee_user"),
+        ("restaurant", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='restaurant',
-            name='menu_of_the_day',
-            field=models.OneToOneField(blank=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='featured_in_restaurant', to='restaurant.menu', verbose_name='Menu of the day'),
+            model_name="restaurant",
+            name="menu_of_the_day",
+            field=models.OneToOneField(
+                blank=True,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                related_name="featured_in_restaurant",
+                to="restaurant.menu",
+                verbose_name="Menu of the day",
+            ),
         ),
         migrations.AlterField(
-            model_name='restaurant',
-            name='user',
-            field=models.OneToOneField(blank=True, on_delete=django.db.models.deletion.PROTECT, related_name='restaurant_model', to=settings.AUTH_USER_MODEL, verbose_name='Representing user'),
+            model_name="restaurant",
+            name="user",
+            field=models.OneToOneField(
+                blank=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name="restaurant_model",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Representing user",
+            ),
         ),
         migrations.AlterField(
-            model_name='vote',
-            name='employee',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='votes', to='employees.employee', verbose_name='Employee'),
+            model_name="vote",
+            name="employee",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="votes",
+                to="employees.employee",
+                verbose_name="Employee",
+            ),
         ),
     ]

@@ -4,66 +4,104 @@ from rest_framework.exceptions import ValidationError
 
 
 class Restaurant(models.Model):
-    name = models.CharField(verbose_name='Restaurant name', max_length=30, blank=False)
-    user = models.OneToOneField(User, related_name='restaurant_model',
-        on_delete=models.PROTECT, verbose_name='Representing user',null=True, blank=True)
+    name = models.CharField(verbose_name="Restaurant name", max_length=30, blank=False)
+    user = models.OneToOneField(
+        User,
+        related_name="restaurant_model",
+        on_delete=models.PROTECT,
+        verbose_name="Representing user",
+        null=True,
+        blank=True,
+    )
 
     def __str__(self):
-        return f'{self.name} restaurant'
+        return f"{self.name} restaurant"
 
 
 class Menu(models.Model):
-    name = models.CharField(verbose_name='Menu name', max_length=20, blank=False)
-    restaurant = models.ForeignKey(Restaurant, related_name='menus', on_delete=models.CASCADE,
-        verbose_name='Restaurant', blank=False)
-    day = models.DateField(verbose_name='Day', db_index=True)
-    dishes = models.ManyToManyField('Dish', blank=False, verbose_name='Dished', related_name='menus')
-    is_featured = models.BooleanField('Is this the menu of the day?', default=False)
+    name = models.CharField(verbose_name="Menu name", max_length=20, blank=False)
+    restaurant = models.ForeignKey(
+        Restaurant,
+        related_name="menus",
+        on_delete=models.CASCADE,
+        verbose_name="Restaurant",
+        blank=False,
+    )
+    day = models.DateField(verbose_name="Day", db_index=True)
+    dishes = models.ManyToManyField(
+        "Dish", blank=False, verbose_name="Dished", related_name="menus"
+    )
+    is_featured = models.BooleanField("Is this the menu of the day?", default=False)
 
     def __str__(self):
-        return f'Menu {self.name} of {self.restaurant.name} restaurant on {self.day}'
-    
+        return f"Menu {self.name} of {self.restaurant.name} restaurant on {self.day}"
+
     def clean(self):
         super().clean()
         if self.is_featured:
-            existing = Menu.objects.filter(restaurant=self.restaurant, day=self.day, is_featured=True)
+            existing = Menu.objects.filter(
+                restaurant=self.restaurant, day=self.day, is_featured=True
+            )
             if self.pk:
                 existing = existing.exclude(pk=self.pk)
             if existing.exists():
-                raise ValidationError(f'Featured dish for {self.day} already exists')
+                raise ValidationError(f"Featured dish for {self.day} already exists")
+
 
 # Non-unique dishes for testing purposes
 class Dish(models.Model):
     # separating images by the first letter of it's field name in database
     def content_file_name(instance, filename):
-        return '/'.join([f'images/', instance.name[0], filename])
-    
-    name = models.CharField(verbose_name='Dish name', max_length=30, blank=False)
-    calories = models.IntegerField(verbose_name='Amount of calories per unit')
+        return "/".join(["images/", instance.name[0], filename])
+
+    name = models.CharField(verbose_name="Dish name", max_length=30, blank=False)
+    calories = models.IntegerField(verbose_name="Amount of calories per unit")
     price = models.DecimalField(max_digits=6, decimal_places=2)
     # blank=True set for image for testing purposes
-    image = models.ImageField(verbose_name='Dish image', blank=True, upload_to=content_file_name)
+    image = models.ImageField(
+        verbose_name="Dish image", blank=True, upload_to=content_file_name
+    )
 
     def __str__(self):
-        return f'Dish {self.name}'
+        return f"Dish {self.name}"
 
 
 class Vote(models.Model):
-    employee = models.ForeignKey('employees.Employee', related_name='votes',
-        blank=False, verbose_name='Employee', on_delete=models.CASCADE)
-    menu = models.ForeignKey(Menu, related_name='votes',
-        blank=False, verbose_name='Menu', on_delete=models.CASCADE)
-    
+    employee = models.ForeignKey(
+        "employees.Employee",
+        related_name="votes",
+        blank=False,
+        verbose_name="Employee",
+        on_delete=models.CASCADE,
+    )
+    menu = models.ForeignKey(
+        Menu,
+        related_name="votes",
+        blank=False,
+        verbose_name="Menu",
+        on_delete=models.CASCADE,
+    )
+
     # pre-save function that restricts voting twice a day for 1 employee
     def clean(self):
-        if Vote.objects.filter(employee=self.employee, menu__day=self.menu.day).exclude(pk=self.pk).exists():
-            raise ValidationError('You have already voted for this day.')
-        
-        employee_restaurant = getattr(self.employee, 'restaurant', None)
-        menu_restaurant = getattr(self.menu, 'restaurant', None)
-        
-        if employee_restaurant and menu_restaurant and employee_restaurant != menu_restaurant:
-            raise ValidationError('Employee and Menu must belong to the same restaurant.')
-        
+        if (
+            Vote.objects.filter(employee=self.employee, menu__day=self.menu.day)
+            .exclude(pk=self.pk)
+            .exists()
+        ):
+            raise ValidationError("You have already voted for this day.")
+
+        employee_restaurant = getattr(self.employee, "restaurant", None)
+        menu_restaurant = getattr(self.menu, "restaurant", None)
+
+        if (
+            employee_restaurant
+            and menu_restaurant
+            and employee_restaurant != menu_restaurant
+        ):
+            raise ValidationError(
+                "Employee and Menu must belong to the same restaurant."
+            )
+
     def __str__(self):
-        return f'{self.employee} voted for {self.menu.name} menu'
+        return f"{self.employee} voted for {self.menu.name} menu"

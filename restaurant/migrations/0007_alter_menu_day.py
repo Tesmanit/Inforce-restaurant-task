@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('restaurant', '0006_alter_dish_image'),
+        ("restaurant", "0006_alter_dish_image"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='menu',
-            name='day',
-            field=models.DateField(db_index=True, verbose_name='Day'),
+            model_name="menu",
+            name="day",
+            field=models.DateField(db_index=True, verbose_name="Day"),
         ),
     ]

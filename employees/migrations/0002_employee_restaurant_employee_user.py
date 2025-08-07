@@ -8,20 +8,30 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('employees', '0001_initial'),
-        ('restaurant', '0001_initial'),
+        ("employees", "0001_initial"),
+        ("restaurant", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='employee',
-            name='restaurant',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='restaurant.restaurant', verbose_name='Restaurant'),
+            model_name="employee",
+            name="restaurant",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="restaurant.restaurant",
+                verbose_name="Restaurant",
+            ),
         ),
         migrations.AddField(
-            model_name='employee',
-            name='user',
-            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='User'),
+            model_name="employee",
+            name="user",
+            field=models.OneToOneField(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="User",
+            ),
         ),
     ]

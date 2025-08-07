@@ -7,28 +7,30 @@ from restaurant.models import Menu, Dish, Restaurant, Vote
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username']
+        fields = ["id", "username"]
 
 
 class RestaurantCreateSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
+
     class Meta:
         model = Restaurant
-        fields = ['name', 'user']
+        fields = ["name", "user"]
 
 
 class DishSerializer(serializers.ModelSerializer):
     class Meta:
         model = Dish
-        fields = ['id', 'name', 'calories', 'price', 'image']
+        fields = ["id", "name", "calories", "price", "image"]
 
 
 class MenuSerializer(serializers.ModelSerializer):
     dishes = DishSerializer(many=True, read_only=True)
     day = serializers.DateField(required=False)
+
     class Meta:
         model = Menu
-        fields = ['id', 'name', 'day', 'dishes']
+        fields = ["id", "name", "day", "dishes"]
 
 
 class MenuVoteSerializerV1(serializers.ModelSerializer):
@@ -36,7 +38,7 @@ class MenuVoteSerializerV1(serializers.ModelSerializer):
 
     class Meta:
         model = Menu
-        fields = ['id', 'name','vote_count']
+        fields = ["id", "name", "vote_count"]
 
 
 class MenuVoteSerializerV2(serializers.ModelSerializer):
@@ -44,7 +46,7 @@ class MenuVoteSerializerV2(serializers.ModelSerializer):
 
     class Meta:
         model = Menu
-        fields = ['id', 'name', 'dishes', 'vote_count']
+        fields = ["id", "name", "dishes", "vote_count"]
 
 
 class VoteCreateSerializer(serializers.ModelSerializer):
@@ -53,5 +55,5 @@ class VoteCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Vote
-        fields = ['menu_id', 'employee_id', 'menu', 'employee']
-        read_only_fields = ['menu', 'employee']
+        fields = ["menu_id", "employee_id", "menu", "employee"]
+        read_only_fields = ["menu", "employee"]

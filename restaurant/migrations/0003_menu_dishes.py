@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('restaurant', '0002_alter_restaurant_menu_of_the_day_and_more'),
+        ("restaurant", "0002_alter_restaurant_menu_of_the_day_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='menu',
-            name='dishes',
-            field=models.ManyToManyField(related_name='menus', to='restaurant.dish', verbose_name='Dished'),
+            model_name="menu",
+            name="dishes",
+            field=models.ManyToManyField(
+                related_name="menus", to="restaurant.dish", verbose_name="Dished"
+            ),
         ),
     ]

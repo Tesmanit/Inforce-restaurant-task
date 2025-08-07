@@ -3,5 +3,5 @@ class AppVersionMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        request.app_version = request.headers.get('X-App-Version')
+        request.app_version = request.headers.get("X-App-Version")
         return self.get_response(request)

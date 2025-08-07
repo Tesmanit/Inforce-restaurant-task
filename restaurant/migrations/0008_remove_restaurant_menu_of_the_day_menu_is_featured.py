@@ -6,17 +6,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('restaurant', '0007_alter_menu_day'),
+        ("restaurant", "0007_alter_menu_day"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='restaurant',
-            name='menu_of_the_day',
+            model_name="restaurant",
+            name="menu_of_the_day",
         ),
         migrations.AddField(
-            model_name='menu',
-            name='is_featured',
-            field=models.BooleanField(default=False, verbose_name='Is this the menu of the day?'),
+            model_name="menu",
+            name="is_featured",
+            field=models.BooleanField(
+                default=False, verbose_name="Is this the menu of the day?"
+            ),
         ),
     ]

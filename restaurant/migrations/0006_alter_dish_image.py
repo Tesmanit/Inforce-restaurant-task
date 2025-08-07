@@ -7,13 +7,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('restaurant', '0005_alter_restaurant_menu_of_the_day_and_more'),
+        ("restaurant", "0005_alter_restaurant_menu_of_the_day_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='dish',
-            name='image',
-            field=models.ImageField(blank=True, upload_to=restaurant.models.Dish.content_file_name, verbose_name='Dish image'),
+            model_name="dish",
+            name="image",
+            field=models.ImageField(
+                blank=True,
+                upload_to=restaurant.models.Dish.content_file_name,
+                verbose_name="Dish image",
+            ),
         ),
     ]

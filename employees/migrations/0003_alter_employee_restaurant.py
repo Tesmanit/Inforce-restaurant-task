@@ -7,14 +7,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('employees', '0002_employee_restaurant_employee_user'),
-        ('restaurant', '0008_remove_restaurant_menu_of_the_day_menu_is_featured'),
+        ("employees", "0002_employee_restaurant_employee_user"),
+        ("restaurant", "0008_remove_restaurant_menu_of_the_day_menu_is_featured"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='employee',
-            name='restaurant',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='employee', to='restaurant.restaurant', verbose_name='Restaurant'),
+            model_name="employee",
+            name="restaurant",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="employee",
+                to="restaurant.restaurant",
+                verbose_name="Restaurant",
+            ),
         ),
     ]
