@@ -10,4 +10,4 @@ class Employee(models.Model):
         verbose_name='User', null=True)
 
     def __str__(self):
-        return f'{self.user.first_name} {self.user.last_name} employee'
+        return f'{self.user.first_name} {self.user.last_name} employee of {self.restaurant.name}'
