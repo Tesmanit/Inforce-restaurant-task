@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
+from rest_framework.exceptions import ValidationError
 
 
 class Restaurant(models.Model):
@@ -58,6 +58,12 @@ class Vote(models.Model):
     def clean(self):
         if Vote.objects.filter(employee=self.employee, menu__day=self.menu.day).exclude(pk=self.pk).exists():
             raise ValidationError('You have already voted for this day.')
+        
+        employee_restaurant = getattr(self.employee, 'restaurant', None)
+        menu_restaurant = getattr(self.menu, 'restaurant', None)
+        
+        if employee_restaurant and menu_restaurant and employee_restaurant != menu_restaurant:
+            raise ValidationError('Employee and Menu must belong to the same restaurant.')
         
     def __str__(self):
         return f'{self.employee} voted for {self.menu.name} menu'

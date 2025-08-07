@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class Employee(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE,
-        verbose_name='Restaurant', null=True)
+        verbose_name='Restaurant', null=True, related_name='employee')
     user = models.OneToOneField(User, on_delete=models.CASCADE, 
         verbose_name='User', null=True)
 
