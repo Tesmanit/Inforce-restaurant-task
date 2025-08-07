@@ -1,0 +1,379 @@
+type: collection.insomnia.rest/5.0
+name: Inforce
+meta:
+  id: wrk_5f0fbfcb8bed45dca53fce3d00cd7765
+  created: 1754569112077
+  modified: 1754569112077
+  description: ""
+collection:
+  - url: http://localhost:8000/api/token/
+    name: Get access and refresh tokens for restaurant
+    meta:
+      id: req_e627e3dcc6d34a628d66645a208faaaa
+      created: 1754569156093
+      modified: 1754587430702
+      isPrivate: false
+      description: ""
+      sortKey: -1754569156093
+    method: POST
+    body:
+      mimeType: multipart/form-data
+      params:
+        - id: pair_dc469e5d523b4086b03ac8c7bbd7393a
+          name: username
+          value: Coolrest1
+          description: ""
+          disabled: false
+        - id: pair_2d7be5c729bc4fa8bd4cfdd851f8b211
+          name: password
+          value: restaurantid1
+          description: ""
+          disabled: false
+    headers:
+      - name: Content-Type
+        value: multipart/form-data
+      - name: User-Agent
+        value: insomnia/11.2.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8000/api/restaurant/menu/
+    name: Create a Menu being a restaurant
+    meta:
+      id: req_303f98e8df82494fb365667302b6b933
+      created: 1754579159322
+      modified: 1754594657669
+      isPrivate: false
+      description: ""
+      sortKey: -1754579159322
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "dish_ids": [1, 2],
+          "name": "Some menu nam"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.2.0
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0NTk0OTI1LCJpYXQiOjE3NTQ1OTQ2MjUsImp0aSI6ImQ5ZTRhZjZlMjFjMDRkYTA5NzQ1YjkwZDBhNDM0MmE3IiwidXNlcl9pZCI6IjcifQ.smq2RbJ54IwP4IlUYtL0UOO1IPSLGxYeYa07XBBCWlg
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8000/api/token/
+    name: Get access and refresh tokens for employee
+    meta:
+      id: req_15d049e9107d4472abbab1366b0604b8
+      created: 1754587436337
+      modified: 1754594584920
+      isPrivate: false
+      description: ""
+      sortKey: -1753187837592
+    method: POST
+    body:
+      mimeType: multipart/form-data
+      params:
+        - id: pair_dc469e5d523b4086b03ac8c7bbd7393a
+          name: username
+          value: Edward1
+          description: ""
+          disabled: false
+        - id: pair_2d7be5c729bc4fa8bd4cfdd851f8b211
+          name: password
+          value: employeeid1
+          description: ""
+          disabled: false
+    headers:
+      - name: Content-Type
+        value: multipart/form-data
+      - name: User-Agent
+        value: insomnia/11.2.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8000/api/token/
+    name: Get access and refresh tokens for admin
+    meta:
+      id: req_5f87c66faf5e490e8cba8ae90b3d6ee3
+      created: 1754590229917
+      modified: 1754590238177
+      isPrivate: false
+      description: ""
+      sortKey: -1753878496842.5
+    method: POST
+    body:
+      mimeType: multipart/form-data
+      params:
+        - id: pair_dc469e5d523b4086b03ac8c7bbd7393a
+          name: username
+          value: admin
+          description: ""
+          disabled: false
+        - id: pair_2d7be5c729bc4fa8bd4cfdd851f8b211
+          name: password
+          value: admin
+          description: ""
+          disabled: false
+    headers:
+      - name: Content-Type
+        value: multipart/form-data
+      - name: User-Agent
+        value: insomnia/11.2.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8000/api/restaurant/
+    name: Create a restaurant
+    meta:
+      id: req_3abed17fef47470ab1a262127f9fd9e8
+      created: 1754590244899
+      modified: 1754590627074
+      isPrivate: false
+      description: ""
+      sortKey: -1754590244899
+    method: POST
+    body:
+      mimeType: multipart/form-data
+      params:
+        - id: pair_d2e1511102af4996a987abda77947451
+          name: restaurant_name
+          value: White Restaurant
+          description: ""
+          disabled: false
+        - id: pair_a399433e169f4a5bab0f04176c562421
+          name: restaurant_user_password
+          value: restaurantid3
+          description: ""
+          disabled: false
+    headers:
+      - name: Content-Type
+        value: multipart/form-data
+      - name: User-Agent
+        value: insomnia/11.4.0
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0NTkwOTIyLCJpYXQiOjE3NTQ1OTA2MjIsImp0aSI6ImUxNzkzZmJjZWZhNzQ1ODlhNjFhMzFkMTY2ZWE1MjFmIiwidXNlcl9pZCI6IjEifQ.Q1MGxnmmJXw4X8nSFAat02YEejXZdMJjSXFYDDt6kBw
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8000/api/employees/creation/
+    name: Create an employee
+    meta:
+      id: req_dad998081f3747e0b3b707c8f178f543
+      created: 1754593595567
+      modified: 1754593797687
+      isPrivate: false
+      description: ""
+      sortKey: -1754593595567
+    method: POST
+    body:
+      mimeType: multipart/form-data
+      params:
+        - id: pair_15dea3479bd24693a507ce1e34ba08b0
+          name: employee_username
+          value: Jimchique5
+          description: ""
+          disabled: false
+        - id: pair_c32a875978054980a67bcf365a9877ae
+          name: employee_password
+          value: employee5
+          description: ""
+          disabled: false
+        - id: pair_f1789efefd2d49bfbab3444b60e1bfd9
+          name: first_name
+          value: Jim
+          description: ""
+          disabled: false
+        - id: pair_abcfb468be20430aa033409a9ff89c57
+          name: last_name
+          value: Carrey
+          description: ""
+          disabled: false
+        - id: pair_521f77e898ea4e42b80122d15b563eeb
+          name: restaurant_id
+          value: "8"
+          description: ""
+          disabled: false
+    headers:
+      - name: Content-Type
+        value: multipart/form-data
+      - name: User-Agent
+        value: insomnia/11.4.0
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0NTk0MDcwLCJpYXQiOjE3NTQ1OTM3NzAsImp0aSI6IjdhMDhkNmQzZTA2NjRhZGJhYWEwZDZmMTFlOTgxZTZlIiwidXNlcl9pZCI6IjEifQ.bWwCc8_cS3t9bLjktaAgEAwt3a9f6UgqKaTVpT1jL3o
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8000/api/restaurant/menu/
+    name: View todays menu for employee
+    meta:
+      id: req_2780592ce1494a0986bbed3bf816c64b
+      created: 1754594448479
+      modified: 1754606235169
+      isPrivate: false
+      description: ""
+      sortKey: -1754594448479
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.4.0
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0NjA2NTI3LCJpYXQiOjE3NTQ2MDYyMjcsImp0aSI6IjNkZWQ3MDA1NDA3MzRiNDJhOGQ5M2E1YWM2ZmIxMjFlIiwidXNlcl9pZCI6IjIifQ.A_0f4oxl4SIQBI3o9TrlU6rHQhuBVpcfdL03RDA35P4
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8000/api/token/
+    name: Get access and refresh tokens for employee 2
+    meta:
+      id: req_19877d595e634b3e9567960ab22dbfcd
+      created: 1754594698136
+      modified: 1754594764447
+      isPrivate: false
+      description: ""
+      sortKey: -1752497178341.5
+    method: POST
+    body:
+      mimeType: multipart/form-data
+      params:
+        - id: pair_dc469e5d523b4086b03ac8c7bbd7393a
+          name: username
+          value: Mily3
+          description: ""
+          disabled: false
+        - id: pair_2d7be5c729bc4fa8bd4cfdd851f8b211
+          name: password
+          value: employeeid3
+          description: ""
+          disabled: false
+    headers:
+      - name: Content-Type
+        value: multipart/form-data
+      - name: User-Agent
+        value: insomnia/11.2.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8000/api/restaurant/votes/
+    name: View todays votes for employee
+    meta:
+      id: req_a6550b35d0b046c3bfcb116ab5b92d8e
+      created: 1754597347495
+      modified: 1754601952702
+      isPrivate: false
+      description: ""
+      sortKey: -1754594022023
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.4.0
+        id: pair_b9fa6effe23e42a6a7195b0bcdec9fe5
+      - id: pair_43d462ceeaa54453b9c6319bf4e0140c
+        name: X-App-Version
+        value: "2"
+        description: ""
+        disabled: false
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0NjAyMTUwLCJpYXQiOjE3NTQ2MDE4NTAsImp0aSI6IjQ2NzIxMmZkY2ZkODQxMDE4OTAyOGEzMjgwNjVmNjZiIiwidXNlcl9pZCI6IjIifQ.D3gEcINCGFhY7yHQwWL5HuWGsVI9zXMLehcYzq7m5w8
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8000/api/restaurant/votes/
+    name: Add vote
+    meta:
+      id: req_509bb06b1f0d446c96b65299743175ee
+      created: 1754600206672
+      modified: 1754605087358
+      isPrivate: false
+      description: ""
+      sortKey: -1754600206672
+    method: POST
+    body:
+      mimeType: multipart/form-data
+      params:
+        - id: pair_4ff018616c5f42809595b5de65800604
+          name: menu_id
+          value: "13"
+          description: ""
+          disabled: false
+    headers:
+      - name: Content-Type
+        value: multipart/form-data
+      - name: User-Agent
+        value: insomnia/11.4.0
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0NjA1Mzc5LCJpYXQiOjE3NTQ2MDUwNzksImp0aSI6ImNhMzRjYzk0N2RjYTQzNWJiOWY5YTZmNzc1NGI0YTI2IiwidXNlcl9pZCI6IjIifQ.BVPTibNMVNJuMaxCTu0Z3_6GutQRqFZ1gnOd3QFGKf8
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_8755c0722684be8738dc3c0acea0f65c3d1f1e2a
+    created: 1754569112084
+    modified: 1754569112084
+environments:
+  name: Base Environment
+  meta:
+    id: env_8755c0722684be8738dc3c0acea0f65c3d1f1e2a
+    created: 1754569112081
+    modified: 1754569112081
+    isPrivate: false
