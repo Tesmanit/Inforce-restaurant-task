@@ -1,7 +1,20 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 
-from restaurant.models import Menu, Dish
+from restaurant.models import Menu, Dish, Restaurant
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username']
+
+
+class RestaurantCreateSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    class Meta:
+        model = Restaurant
+        fields = ['name', 'user']
 
 
 class DishSerializer(serializers.ModelSerializer):

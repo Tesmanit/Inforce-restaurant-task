@@ -9,6 +9,19 @@ from restaurant.models import Menu, Dish, Restaurant
 from restaurant.serializers import MenuSerializer, RestaurantCreateSerializer
 
 
+class RestaurantViewSet(viewsets.ModelViewSet):
+    http_method_names = ['post']
+    permission_classes = [permissions.IsAdminUser]
+    def create(self, request, *args, **kwargs):
+        restaurant_name = request.data.get('restaurant_name')
+        restaurant_user_password = request.data.get('restaurant_user_password')
+        user = User.objects.create_user(username=restaurant_name, password=restaurant_user_password)
+        user.save()
+        restaurant = Restaurant.objects.create(name=restaurant_name, user=user)
+        serializer = RestaurantCreateSerializer(restaurant)
+        return Response(data=serializer.data)
+
+
 class MenuViewSet(viewsets.ModelViewSet):
     http_method_names = ['post']
     serializer_class = MenuSerializer
