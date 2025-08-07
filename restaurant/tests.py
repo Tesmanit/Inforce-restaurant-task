@@ -8,6 +8,7 @@ from datetime import date
 
 class FullFlowTests(APITestCase):
     def setUp(self):
+        # creating some instances for tests
         self.employee_user = User.objects.create_user(
             username="employee", password="testpass"
         )
@@ -28,6 +29,7 @@ class FullFlowTests(APITestCase):
         self.resto = Restaurant.objects.create(name="Resto", user=self.resto_user)
 
     def test_employee_vote_success(self):
+        # Test that an authenticated employee can vote successfully
         self.client.force_authenticate(user=self.employee_user)
         url = reverse("votes-list")
         data = {"menu_id": self.menu.id}
@@ -36,6 +38,7 @@ class FullFlowTests(APITestCase):
         self.assertEqual(response.data, "Vote has been succesfully added")
 
     def test_employee_vote_twice_same_day(self):
+        # Test that an employee cannot vote twice on the same day
         self.client.force_authenticate(user=self.employee_user)
         url = reverse("votes-list")
         data = {"menu_id": self.menu.id}
@@ -45,6 +48,7 @@ class FullFlowTests(APITestCase):
         self.assertIn("You have already voted for this day", str(response.data))
 
     def test_create_menu_invalid_dish_ids(self):
+        # Test that menu creation fails with invalid dish IDs
         self.client.force_authenticate(user=self.resto_user)
         url = reverse("menu-list")
         data = {"name": "Dinner", "dish_ids": [999, 888], "day": str(date.today())}
@@ -53,6 +57,7 @@ class FullFlowTests(APITestCase):
         self.assertIn("One or more dish IDs are invalid", str(response.data))
 
     def test_create_menu_duplicate_same_day(self):
+        # Test that creating a menu with same name and day fails for the same restaurant
         self.client.force_authenticate(user=self.employee_user)
         url = reverse("menu-list")
         data = {"name": "Lunch", "dish_ids": [self.dish.id], "day": str(date.today())}
