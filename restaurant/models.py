@@ -22,6 +22,15 @@ class Menu(models.Model):
 
     def __str__(self):
         return f'Menu {self.name} of {self.restaurant.name} restaurant on {self.day}'
+    
+    def clean(self):
+        super().clean()
+        if self.is_featured:
+            existing = Menu.objects.filter(restaurant=self.restaurant, day=self.day, is_featured=True)
+            if self.pk:
+                existing = existing.exclude(pk=self.pk)
+            if existing.exists():
+                raise ValidationError(f'Featured dish for {self.day} already exists')
 
 # Non-unique dishes for testing purposes
 class Dish(models.Model):
