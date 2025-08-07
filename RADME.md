@@ -13,3 +13,8 @@ Passwords for all the restaurant users are restaurantid{the number after restaur
 JWT Token was used as auth tool, so use Bearer token authentication, it's in the Auth tab in Insomnia
 To use flake8 run flake8 {app name(either employees or restaurant)}
 For get request on http://localhost:8000/api/restaurant/votes/ you need to all header 'X-App-Version' (1 or 2)
+
+You will also need to create .env file in app folder and fill it like that(you can use these exact values):
+POSTGRES_DB=INFORCEDB
+POSTGRES_USER=INFORCEUSER
+POSTGRES_PASSWORD=INFORCEPASS
