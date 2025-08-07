@@ -5,8 +5,6 @@ from django.core.exceptions import ValidationError
 
 class Restaurant(models.Model):
     name = models.CharField(verbose_name='Restaurant name', max_length=30, blank=False)
-    menu_of_the_day = models.OneToOneField('Menu', related_name='featured_in_restaurant', 
-        on_delete=models.DO_NOTHING, verbose_name='Menu of the day', null=True, blank=True)
     user = models.OneToOneField(User, related_name='restaurant_model',
         on_delete=models.PROTECT, verbose_name='Representing user',null=True, blank=True)
 
@@ -20,6 +18,7 @@ class Menu(models.Model):
         verbose_name='Restaurant', blank=False)
     day = models.DateField(verbose_name='Day', db_index=True)
     dishes = models.ManyToManyField('Dish', blank=False, verbose_name='Dished', related_name='menus')
+    is_featured = models.BooleanField('Is this the menu of the day?', default=False)
 
     def __str__(self):
         return f'Menu {self.name} of {self.restaurant.name} restaurant on {self.day}'
